@@ -2,7 +2,6 @@ package com.yungnickyoung.minecraft.betterfortresses.mixin;
 
 import com.yungnickyoung.minecraft.betterfortresses.BetterFortressesCommon;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.SectionPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -33,8 +32,8 @@ public class DisableVanillaFortressesMixin {
             long seed,
             ChunkAccess chunkAccess,
             ChunkPos chunkPos,
-            SectionPos sectionPos,
             ResourceKey<Level> levelResourceKey,
+            net.minecraft.world.level.biome.Climate.Sampler climateSampler,
             CallbackInfoReturnable<Boolean> cir
     ) {
         if (BetterFortressesCommon.CONFIG.general.disableVanillaFortresses && structureSetEntry.structure().value().type() == StructureType.FORTRESS) {
