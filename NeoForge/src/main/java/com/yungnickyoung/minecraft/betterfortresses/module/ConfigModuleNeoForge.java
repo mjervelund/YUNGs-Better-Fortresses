@@ -25,7 +25,7 @@ public class ConfigModuleNeoForge {
 
     public static void init(ModContainer container) {
         initCustomFiles();
-        container.registerConfig(ModConfig.Type.COMMON, BNFConfigNeoForge.SPEC, "betterfortresses-neoforge-26_1.toml");
+        container.registerConfig(ModConfig.Type.STARTUP, BNFConfigNeoForge.SPEC, "betterfortresses-neoforge-26_1.toml");
         NeoForge.EVENT_BUS.addListener(ConfigModuleNeoForge::onWorldLoad);
         BetterFortressesNeoForge.loadingContextEventBus.addListener(ConfigModuleNeoForge::onConfigChange);
     }

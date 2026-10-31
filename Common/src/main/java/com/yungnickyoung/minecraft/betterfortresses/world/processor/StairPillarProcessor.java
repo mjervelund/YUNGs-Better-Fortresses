@@ -22,7 +22,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 
 
-public class StairPillarProcessor extends StructureProcessor {
+public class StairPillarProcessor implements StructureProcessor {
     public static final StairPillarProcessor INSTANCE = new StairPillarProcessor();
     public static final MapCodec<StairPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -30,7 +30,7 @@ public class StairPillarProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos blockPosLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.STONE_BRICK_STAIRS) || blockInfoGlobal.state().is(Blocks.PURPUR_STAIRS)) {
@@ -80,7 +80,8 @@ public class StairPillarProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.STAIR_PILLAR_PROCESSOR;
     }
 }

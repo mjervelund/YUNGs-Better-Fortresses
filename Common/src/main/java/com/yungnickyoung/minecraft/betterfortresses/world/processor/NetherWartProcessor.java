@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 
 
-public class NetherWartProcessor extends StructureProcessor {
+public class NetherWartProcessor implements StructureProcessor {
     public static final NetherWartProcessor INSTANCE = new NetherWartProcessor();
     public static final MapCodec<NetherWartProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -24,7 +24,7 @@ public class NetherWartProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos blockPosLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.NETHER_WART)) {
@@ -36,7 +36,8 @@ public class NetherWartProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.NETHER_WART_PROCESSOR;
     }
 }

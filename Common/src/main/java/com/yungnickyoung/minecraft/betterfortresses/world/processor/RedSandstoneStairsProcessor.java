@@ -22,7 +22,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 
 
-public class RedSandstoneStairsProcessor extends StructureProcessor {
+public class RedSandstoneStairsProcessor implements StructureProcessor {
     public static final RedSandstoneStairsProcessor INSTANCE = new RedSandstoneStairsProcessor();
     public static final MapCodec<RedSandstoneStairsProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -30,7 +30,7 @@ public class RedSandstoneStairsProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos blockPosLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.RED_SANDSTONE_STAIRS)) {
@@ -68,7 +68,8 @@ public class RedSandstoneStairsProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.RED_SANDSTONE_STAIRS_PROCESSOR;
     }
 }

@@ -19,7 +19,7 @@ import net.minecraft.world.level.material.Fluids;
 
 
 
-public class LiquidBlockProcessor extends StructureProcessor {
+public class LiquidBlockProcessor implements StructureProcessor {
     public static final MapCodec<LiquidBlockProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
             .group(
                     BlockState.CODEC.fieldOf("target_block").forGetter(config -> config.targetBlock),
@@ -38,7 +38,7 @@ public class LiquidBlockProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos blockPosLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(this.targetBlock.getBlock())) {
@@ -53,7 +53,8 @@ public class LiquidBlockProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.LIQUID_BLOCK_PROCESSOR;
     }
 }
